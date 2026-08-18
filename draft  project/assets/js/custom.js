@@ -928,3 +928,14 @@
 
 
 })(jQuery);
+
+    /* Thumbnail Click Handler for Product Details Main Image Update */
+    $(document).on('click', '#shop-details-one__thumb .swiper-slide', function() {
+        var idx = $(this).index();
+        var carouselElem = document.querySelector('#shop-details-one__carousel');
+        if (carouselElem && carouselElem.swiper) {
+            carouselElem.swiper.slideTo(idx);
+        }
+        $('#shop-details-one__thumb .product-details__thumb-img').removeClass('active');
+        $(this).find('.product-details__thumb-img').addClass('active');
+    });

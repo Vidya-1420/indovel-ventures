@@ -3350,7 +3350,13 @@ select:focus {
 }
 
 .activities-style1__left-img-inner img {
-    width: auto;
+    width: 100% !important;
+    height: 100% !important;
+    max-height: 320px !important;
+    object-fit: cover !important;
+    object-position: center !important;
+    border-radius: 20px !important;
+    display: block !important;
 }
 
 .activities-style1__left-img-shape {
@@ -10127,3 +10133,154 @@ Modifier Css
 /*--------------------------------------------------
 # End Css 
 ----------------------------------------------------*/
+
+/* ==========================================================================
+   Product Image Sizing, Fitting & Alignment (IndoVel Catalogue Consistency)
+   ========================================================================== */
+
+/* 1. Products & Listing Page Cards (268px x 170px Image Area) */
+.single-shop-style1 {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: #ffffff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+.single-shop-style1__inner {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.single-shop-style1__img {
+    position: relative;
+    width: 100%;
+    height: 170px !important;
+    max-height: 170px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    overflow: hidden;
+    background: #f8f9fa;
+    border-radius: 8px 8px 0 0;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.single-shop-style1__img img {
+    width: 100% !important;
+    max-width: 268px !important;
+    height: 100% !important;
+    max-height: 150px !important;
+    object-fit: contain !important;
+    object-position: center !important;
+    transition: transform 0.4s ease;
+}
+
+.single-shop-style1:hover .single-shop-style1__img img {
+    transform: scale(1.05);
+}
+
+.single-shop-style1__content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 18px 20px;
+}
+
+/* 2. Product Details Page (570px x 515px Main Image Area) */
+.product-details__left-inner {
+    width: 100%;
+    max-width: 570px;
+}
+
+.product-details__img {
+    position: relative;
+    width: 100%;
+    max-width: 570px;
+    height: 515px !important;
+    max-height: 515px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    overflow: hidden;
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+.product-details__img img {
+    width: 100% !important;
+    max-width: 540px !important;
+    height: 100% !important;
+    max-height: 485px !important;
+    object-fit: contain !important;
+    object-position: center !important;
+}
+
+/* 3. Product Details Thumbnails (100px x 100px) */
+.product-details__thumb-box {
+    margin-top: 15px;
+}
+
+.product-details__thumb-box .swiper-slide {
+    width: 100px !important;
+    margin-right: 12px !important;
+}
+
+.product-details__thumb-img {
+    width: 100px !important;
+    height: 100px !important;
+    max-width: 100px !important;
+    max-height: 100px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    overflow: hidden;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border: 2px solid #e5e5e5;
+    padding: 6px;
+    box-sizing: border-box;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.product-details__thumb-img img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+    object-position: center !important;
+}
+
+.product-details__thumb-img:hover,
+.product-details__thumb-img.active,
+.swiper-slide-thumb-active .product-details__thumb-img {
+    border-color: var(--thm-primary-color, #f4a261) !important;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+/* Responsive Overrides */
+@media (max-width: 767px) {
+    .product-details__img {
+        height: 360px !important;
+        max-height: 360px !important;
+    }
+    .product-details__img img {
+        max-height: 330px !important;
+    }
+    .product-details__thumb-box .swiper-slide {
+        width: 80px !important;
+        margin-right: 8px !important;
+    }
+    .product-details__thumb-img {
+        width: 80px !important;
+        height: 80px !important;
+    }
+}
