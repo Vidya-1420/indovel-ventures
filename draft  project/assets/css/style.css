@@ -3311,8 +3311,14 @@ select:focus {
 =================================================
 ***/
 .activities-style1 {
-    background-color: var(--thm-gray-bg-2);
-    padding: 80px 0px 120px;
+    position: relative;
+    display: block;
+    padding: 110px 0px 120px;
+    z-index: 1;
+}
+
+.activities-style1 .container > .row {
+    align-items: center;
 }
 
 .activities-style1__shape {
@@ -3330,16 +3336,17 @@ select:focus {
 .activities-style1__left {
     position: relative;
     display: block;
-    padding-left: 100px;
+    padding-left: 95px;
     margin-right: 10px;
 }
 
 .activities-style1__left-img {
     position: relative;
     display: block;
-    overflow: hidden;
-    padding-right: 100px;
-    margin-right: 20px;
+    overflow: visible;
+    padding-right: 65px;
+    margin-right: 15px;
+    z-index: 2;
 }
 
 .activities-style1__left-img-inner {
@@ -3347,12 +3354,14 @@ select:focus {
     display: block;
     overflow: hidden;
     border-radius: var(--thm-border-radius);
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.08);
 }
 
 .activities-style1__left-img-inner img {
     width: 100% !important;
     height: 100% !important;
-    max-height: 320px !important;
+    min-height: 380px !important;
+    max-height: 420px !important;
     object-fit: cover !important;
     object-position: center !important;
     border-radius: 20px !important;
@@ -3361,8 +3370,10 @@ select:focus {
 
 .activities-style1__left-img-shape {
     position: absolute;
-    top: 70px;
-    left: 0;
+    top: -55px;
+    left: -45px;
+    z-index: 3;
+    pointer-events: none;
 }
 
 .activities-style1__left-img-shape img {
@@ -3371,9 +3382,10 @@ select:focus {
 
 .activities-style1__left-big-title {
     position: absolute;
-    top: 50%;
+    top: calc(50% + 50px);
     left: -7px;
     transform: translateY(-50%);
+    z-index: 4;
 }
 
 .activities-style1__left-big-title h2 {
@@ -3389,27 +3401,29 @@ select:focus {
 
 .activities-style1__left-border {
     position: absolute;
-    top: 90px;
-    right: 0;
-    width: 355px;
-    height: 355px;
+    top: 50px;
+    right: 10px;
+    width: 360px;
+    height: 360px;
     border-radius: 50%;
     background-color: transparent;
-    border: 2px dotted var(--thm-primary-color);
+    border: 2px dotted rgba(212, 160, 23, 0.45);
+    z-index: 1;
 }
 
 .activities-style1__left-fact {
     position: absolute;
-    right: 20px;
-    bottom: 60px;
-    width: 205px;
-    height: 205px;
+    right: -10px;
+    bottom: 15px;
+    width: 190px;
+    height: 190px;
     overflow: hidden;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 5;
+    box-shadow: 0px 8px 25px rgba(0,0,0,0.12);
 }
 
 .activities-style1__left-fact-bg {
@@ -3437,8 +3451,8 @@ select:focus {
 }
 
 .activities-style1__left-fact-title h4 {
-    font-size: 18px;
-    line-height: 28px;
+    font-size: 17px;
+    line-height: 24px;
     font-weight: 600;
 }
 
@@ -3455,12 +3469,12 @@ select:focus {
     position: relative;
     display: inline-flex;
     align-items: center;
-    margin-top: 8px;
+    margin-top: 6px;
 }
 
 .activities-style1__left-fact-count h2 {
     color: var(--thm-black-bg);
-    font-size: 36px;
+    font-size: 34px;
     line-height: 1.0em;
     font-family: var(--thm-font-3);
     font-weight: 400;
@@ -3469,7 +3483,7 @@ select:focus {
 .activities-style1__left-fact-count .percent {
     position: relative;
     color: var(--thm-black-bg);
-    font-size: 36px;
+    font-size: 34px;
     line-height: 1.0em;
     font-family: var(--thm-font-3);
     font-weight: 400;
@@ -3485,19 +3499,33 @@ select:focus {
     display: block;
 }
 
+.activities-style1__content-inner ul.row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.activities-style1__content-inner ul.row > li {
+    display: flex;
+}
+
 .single-activities-style1 {
     position: relative;
-    display: block;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
     overflow: hidden;
     text-align: center;
     background-color: var(--thm-gray-bg-3);
     border-radius: var(--thm-border-radius);
-    padding: 33px 0px 40px;
+    padding: 38px 24px 38px;
 }
 
 .single-activities-style1__content {
     position: relative;
     display: block;
+    flex-grow: 1;
 }
 
 .single-activities-style1__content h3 {
@@ -3519,6 +3547,7 @@ select:focus {
 
 .single-activities-style1__content p {
     margin: 0;
+    line-height: 26px;
 }
 
 .single-activities-style1__content a.btn-box {
@@ -3530,7 +3559,7 @@ select:focus {
     line-height: 28px;
     font-family: var(--thm-font-2);
     font-weight: 600;
-    margin-top: 20px;
+    margin-top: 22px;
     transition: all 200ms linear;
     transition-delay: 0.1s;
 }
@@ -3555,7 +3584,7 @@ select:focus {
     height: 90px;
     border-radius: 50%;
     background-color: var(--thm-black-bg);
-    margin: 31px auto 0px;
+    margin: 28px auto 0px;
 }
 
 .single-activities-style1__icon-inner {
@@ -3590,11 +3619,6 @@ select:focus {
     background-position: bottom center;
 }
 
-/*** 
-=================================================
-    Activities Style2     
-=================================================
-***/
 .activities-style1--style2 {
     position: relative;
     display: block;
