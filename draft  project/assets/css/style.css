@@ -10308,3 +10308,29 @@ Modifier Css
         height: 80px !important;
     }
 }
+
+
+/* Custom Footer Link Text Color Matching Existing Footer Text (#a4a9ab) */
+.footer-widget-links ul li a {
+    color: #a4a9ab !important;
+    transition: all 0.3s ease;
+}
+.footer-widget-links ul li a:hover {
+    color: var(--thm-primary-color, #f4a261) !important;
+}
+
+
+/* Disabled Pagination Arrow Styling */
+.styled-pagination li.disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+.styled-pagination li.disabled a {
+    pointer-events: none;
+}
+
+
+/* Class-based Pagination Visibility for Product Grid Columns */
+.page-hidden {
+    display: none !important;
+}
