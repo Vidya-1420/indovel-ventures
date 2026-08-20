@@ -662,31 +662,62 @@
       mirror: true
     });
   }
-
-  //Contact Form Validation
-  if ($("#contact-form").length) {
-    $("#contact-form").validate({
-      submitHandler: function (form) {
-        var form_btn = $(form).find('button[type="submit"]');
-        var form_result_div = '#form-result';
-        $(form_result_div).remove();
-        form_btn.before('<div id="form-result" class="alert alert-success" role="alert" style="display: none;"></div>');
-        var form_btn_old_msg = form_btn.html();
-        form_btn.html(form_btn.prop('disabled', true).data("loading-text"));
-        $(form).ajaxSubmit({
-          dataType: 'json',
-          success: function (data) {
-            if (data.status = 'true') {
-              $(form).find('.form-control').val('');
-            }
-            form_btn.prop('disabled', false).html(form_btn_old_msg);
-            $(form_result_div).html(data.message).fadeIn('slow');
-            setTimeout(function () {
-              $(form_result_div).fadeOut('slow')
-            }, 6000);
+  //Contact Form Validation (Web3Forms API integration)
+  if ($("#contact-form, #contact-form-two, .default-form2").length) {
+    $("#contact-form, #contact-form-two, .default-form2").each(function () {
+      $(this).validate({
+        submitHandler: function (form) {
+          var form_btn = $(form).find('button[type="submit"]');
+          var form_result_div = $(form).find('.form-result');
+          if (!form_result_div.length) {
+            form_result_div = $('<div class="form-result alert alert-success" role="alert" style="display: none; margin-top: 15px;"></div>');
+            form_btn.before(form_result_div);
           }
-        });
-      }
+          var form_btn_old_msg = form_btn.html();
+          form_btn.html(form_btn.prop('disabled', true).data("loading-text") || 'Sending...');
+
+          var formData = new FormData(form);
+          var object = {};
+          formData.forEach(function(value, key){
+            object[key] = value;
+          });
+          var json = JSON.stringify(object);
+
+          $.ajax({
+            url: 'https://api.web3forms.com/submit',
+            type: 'POST',
+            data: json,
+            contentType: 'application/json',
+            dataType: 'json',
+            headers: {
+              'Accept': 'application/json'
+            },
+            success: function (data) {
+              if (data.success) {
+                $(form).find('input[type="text"], input[type="email"], input[type="tel"], textarea').val('');
+                form_result_div.removeClass('alert-danger').addClass('alert-success').html(data.message || 'Thank you! Your message has been sent successfully.').fadeIn('slow');
+              } else {
+                form_result_div.removeClass('alert-success').addClass('alert-danger').html(data.message || 'Something went wrong. Please try again.').fadeIn('slow');
+              }
+              form_btn.prop('disabled', false).html(form_btn_old_msg);
+              setTimeout(function () {
+                form_result_div.fadeOut('slow');
+              }, 6000);
+            },
+            error: function (err) {
+              var errorMsg = 'Something went wrong. Please try again.';
+              if (err.responseJSON && err.responseJSON.message) {
+                errorMsg = err.responseJSON.message;
+              }
+              form_result_div.removeClass('alert-success').addClass('alert-danger').html(errorMsg).fadeIn('slow');
+              form_btn.prop('disabled', false).html(form_btn_old_msg);
+              setTimeout(function () {
+                form_result_div.fadeOut('slow');
+              }, 6000);
+            }
+          });
+        }
+      });
     });
   }
 
