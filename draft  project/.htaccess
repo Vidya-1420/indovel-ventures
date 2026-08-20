@@ -1,0 +1,50 @@
+# Apache .htaccess configuration for indovelventures.com
+# Enables Caching & Compression headers for static assets (images, CSS, JS, fonts)
+
+# Enable Mod_Expires
+<IfModule mod_expires.c>
+    ExpiresActive On
+    
+    # Default expiration: 1 month
+    ExpiresDefault "access plus 1 month"
+    
+    # Images (WebP, PNG, JPG, GIF, SVG, ICO)
+    ExpiresByType image/webp "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+    ExpiresByType image/x-icon "access plus 1 year"
+    
+    # Web Fonts (WOFF2, WOFF, TTF, EOT, OTF)
+    ExpiresByType font/woff2 "access plus 1 year"
+    ExpiresByType font/woff "access plus 1 year"
+    ExpiresByType font/ttf "access plus 1 year"
+    ExpiresByType application/vnd.ms-fontobject "access plus 1 year"
+    ExpiresByType font/otf "access plus 1 year"
+    
+    # CSS & JavaScript
+    ExpiresByType text/css "access plus 1 week"
+    ExpiresByType application/javascript "access plus 1 week"
+    ExpiresByType text/javascript "access plus 1 week"
+</IfModule>
+
+# Enable Mod_Headers for Cache-Control
+<IfModule mod_headers.c>
+    # 1 Year Immutable Cache for Static Images & Fonts
+    <FilesMatch "\.(webp|woff2|woff|ttf|eot|otf|ico|png|jpe?g|gif|svg)$">
+        Header set Cache-Control "public, max-age=31536000, immutable"
+    </FilesMatch>
+    
+    # 1 Week Cache for CSS & JS
+    <FilesMatch "\.(css|js)$">
+        Header set Cache-Control "public, max-age=604800"
+    </FilesMatch>
+    
+    # No Cache for HTML files to ensure immediate updates
+    <FilesMatch "\.(html|htm)$">
+        Header set Cache-Control "no-cache, no-store, must-revalidate"
+        Header set Pragma "no-cache"
+        Header set Expires 0
+    </FilesMatch>
+</IfModule>
